@@ -1,13 +1,30 @@
 import React, {useState} from 'react';
 import "./Login.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
 
   function handleLogin(e){
     e.preventDefault();
+    const user = {email: email, password:password}
+    fetch("http://localhost:5001/login",{
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+				'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    }).then(res => res.json()).then((body) =>{
+      if(body.status === 400){
+        alert(body.message)
+      }
+      else{
+        navigate("/projects")
+      }
+    })
   }
 
   return (

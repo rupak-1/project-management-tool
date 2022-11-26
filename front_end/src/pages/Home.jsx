@@ -13,7 +13,7 @@ function Home() {
                 </h2>
                 <p>There are no limits when a project is managed properly</p>
                 <LinkContainer to="/projects">
-                    <Button  className="btn-home" variant='success'>
+                    <Button className="btn-home" variant='success'>
                         Bulid Together! <i class="fa-sharp fa-solid fa-users"></i>
                     </Button>
                 </LinkContainer>

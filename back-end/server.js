@@ -49,7 +49,10 @@ app.post('/create', async(req, res) => {
     const {name, email, password} = req.body;
     console.log(req.body);
     const user = await User.create({name, email, password});
-    res.status(201).json(user)
+    res.status(201).json({
+      status:201,
+      data: user
+    })
   }
   catch(err){
     res.status(400).json({
@@ -63,10 +66,13 @@ app.post('/login', async(req, res) => {
   try{
     const {email, password} = req.body;
     const user = await User.findByCredentials(email, password);
-    res.status(200).json(user);
+    res.status(200).json({
+      status:200,
+      data:user
+    });
   }
   catch(err){
-    res.status(400).json(err.message)
+    res.status(400).json({ status:400, message:err.message})
   }
 })
 

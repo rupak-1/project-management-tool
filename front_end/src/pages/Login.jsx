@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import "./Login.css";
 import {Link, useNavigate} from "react-router-dom";
+import Navigation from '../components/Navigation';
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,18 +19,19 @@ function Login() {
       },
       body: JSON.stringify(user)
     }).then(res => res.json()).then((body) =>{
-      console.log(body.token)
       if(body.status === 400){
         alert(body.message)
       }
       else{
-        console.log(body)
+        localStorage.setItem("Token", body.token);
         navigate("/projects")
       }
     })
   }
 
   return (
+    <>
+    <Navigation/>
     <div className='container'>
       <div className='row'>
       <div className='col col-md-5 login__bg'></div>
@@ -54,6 +56,7 @@ function Login() {
       </div>
       </div>
     </div>
+    </>
     
   );
 }

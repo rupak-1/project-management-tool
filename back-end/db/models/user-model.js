@@ -19,10 +19,6 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required : [true, "This field cannot be empty "]
-    },
-    newProject:{
-        type: Object,
-        default: {} 
     }
 }, {minimize:false});
 
@@ -33,15 +29,13 @@ UserSchema.methods.toJSON = function(){
     return userObject;
 }
 
-UserSchema.statics.findByCredentials = async function(email, password){
-    const user = await User.findOne({email});
-    if(!user) throw new Error("invalid email or password");
-    const isMatch = password === user.password;
-    if(!isMatch) throw new Error("invalid email or password");
+UserSchema.statics.findByEmail = async function(email){
+    const user = await User.findOne({email: email});
+    if(!user) throw new Error("invalid email");
     // if any throws an error it does not return
     return user
 }
 
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model("users", UserSchema);
 module.exports = User

@@ -17,7 +17,7 @@ function Signup() {
       return;
     }
     const user = {email:email, password:password, name:name}
-    fetch("http://localhost:5001/create",{
+    fetch("http://localhost:5001/api/register",{
       method: "POST",
       headers: {
         'Accept': 'application/json',
@@ -29,7 +29,8 @@ function Signup() {
         alert(body.message)
       }
       else{
-        navigate("/projects")
+        console.log(body);
+        navigate("/login")
       }
     })
    }

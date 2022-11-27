@@ -10,7 +10,7 @@ function Login() {
   function handleLogin(e){
     e.preventDefault();
     const user = {email: email, password:password}
-    fetch("http://localhost:5001/login",{
+    fetch("http://localhost:5001/api/login",{
       method: "POST",
       headers: {
         'Accept': 'application/json',
@@ -18,10 +18,12 @@ function Login() {
       },
       body: JSON.stringify(user)
     }).then(res => res.json()).then((body) =>{
+      console.log(body.token)
       if(body.status === 400){
         alert(body.message)
       }
       else{
+        console.log(body)
         navigate("/projects")
       }
     })

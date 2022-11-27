@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import "./Signup.css"
 import {Link, useNavigate} from "react-router-dom";
+import Navigation from '../components/Navigation';
 
 
 function Signup() {
@@ -37,7 +38,8 @@ function Signup() {
   
 
   return (
-
+    <>
+    <Navigation/>
     <div className='container'>
     <div className='row'>
     <div className='col col-md-5 signup__bg'></div>
@@ -70,6 +72,7 @@ function Signup() {
     </div>
     </div>
   </div>
+  </>
   )
 }
 

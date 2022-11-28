@@ -18,8 +18,8 @@ function Navigation() {
                <LinkContainer to="/login">
                <Nav.Link>Login</Nav.Link>
                </LinkContainer>
-               <LinkContainer to="/projects">
-               <Nav.Link>Projects</Nav.Link>
+               <LinkContainer to="/project">
+               <Nav.Link>Project</Nav.Link>
                </LinkContainer>
                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

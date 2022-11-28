@@ -85,7 +85,9 @@ const getProjects = async (req, res) => {
 
 const getProject = async (req, res) => {
   try {
-    const projects = await Project.find({_id: req.params.id});
+    console.log(req.params.id);
+    const projects = await Project.findOne({_id:req.params.id});
+    console.log(projects)
     return res.status(200).json({ success: true, data: projects });
   } catch (error) {
     return res.status(400).json({ success: false, error });

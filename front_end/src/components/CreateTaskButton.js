@@ -5,6 +5,7 @@ function CreateTaskButton() {
   const [formClosed, setFormClosed] = useState(true);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const projectId = useParams();  
   
   function handleClosed(){
     setFormClosed(false)
@@ -12,6 +13,26 @@ function CreateTaskButton() {
 
   function handleSubmit(){
     setFormClosed(true)
+  }
+
+  function handleCreate(){
+    const token = localStorage.getItem("Token")
+    fetch(`http://localhost:5001/api/project/task`,{
+    method: "PUT",
+    body: JSON.stringify({
+      "_id": projectId,
+      "task" :
+      {"description" : description,
+      "status": false,
+      "title": title}
+    }),
+    headers: {'Content-Type': 'application/json', 'authorization': token}
+   }).then(res => res.json()).then(data => {
+    if(data.success){
+      handleSubmit()
+    }
+   })
+
   }
  
   return (
@@ -24,7 +45,7 @@ function CreateTaskButton() {
       <div class="card-body">
         <TextareaAutosize placeholder='Enter project title' autoFocus required onChange={e => setTitle(e.target.value)} style={{resize:"none",width:"100%",overflow:"hidden"}} />
         <TextareaAutosize placeholder='Enter project description' required onChange={e => setDescription(e.target.value)} style={{resize:"none",width:"100%",overflow:"hidden"}} />
-        <a href="#" class="btn btn-primary" onClick={handleSubmit}>Create Task</a>
+        <a href="#" class="btn btn-primary" onClick={handleCreate}>Create Task</a>
       </div>
    </div>}
     </>

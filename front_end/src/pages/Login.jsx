@@ -24,7 +24,7 @@ function Login() {
       }
       else{
         localStorage.setItem("Token", body.token);
-        navigate("/projects")
+        navigate("/dashboard")
       }
     })
   }

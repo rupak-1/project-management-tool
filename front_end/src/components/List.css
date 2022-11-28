@@ -5,3 +5,8 @@
 .btn-status{
     color: red;
 }
+
+.title-properties{
+    display: flex;
+    justify-content: space-between;
+}

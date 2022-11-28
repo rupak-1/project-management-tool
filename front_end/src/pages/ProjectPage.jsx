@@ -1,9 +1,22 @@
 import React from 'react'
 import List from '../components/List'
+import Navigation from '../components/Navigation'
 import ProjectHeading from '../components/ProjectHeading'
+import {useParams} from "react-router-dom"
 
-function Project() {
+function ProjectPage() {
+  const [Task, SetTasks]  = useState()
+  console.log(useParams());
+  const token = localStorage.getItem("Token")
+  fetch(`http://localhost:5001/project/${useParams}`, {
+    method: "POST",
+    body: JSON.stringify()
+
+  })
+  
   return (
+    <>
+    <Navigation/>
     <div className= "container-fluid">
         <div className="row d-flex align-items-center mt-4 mb-4">
             <ProjectHeading heading = "Build a project mangement tool"  />
@@ -21,7 +34,8 @@ function Project() {
             <List/>
         </div>
     </div>
+    </>
   )
 }
 
-export default Project
+export default ProjectPage

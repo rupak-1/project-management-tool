@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {Row, Col, Button} from "react-bootstrap"
 import Navigation from '../components/Navigation';
 import {LinkContainer} from "react-router-bootstrap";
 import "./Home.css";
 function Home() {
-   const [looggedIn, setloggedIn] = useState(localStorage.getItem("Token")) // return  null 
   return (
     <>
-    <Navigation/>
+    <Navigation />
     <Row>
         <Col md={6} className="home-page-img"></Col>
         <Col md={6} className="d-flex flex-direction-column align-items-center justify-content-center">

@@ -6,6 +6,7 @@ const projectSchema = new mongoose.Schema(
     description: {type: String},
     members: { type: [{ type: String, unique: true }] },
     manager: { type: String },
+    tasks: {type: [{description: String, deadline: Date, status: Boolean}]}
     
   },
   { timestamps: true }

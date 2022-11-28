@@ -27,7 +27,7 @@ const createProject = async (req, res) => {
   }
 };
 
-const updateProject = async (req, res) => {
+const addTask = async (req, res) => {
   const body = req.body;
 
   if (!body) {
@@ -38,7 +38,7 @@ const updateProject = async (req, res) => {
   }
 
   try {
-    await Project.updateOne({ _id: req.params.id }, body);
+    await Project.updateOne({_id: body.id}, {$push: body.task})
     return res.status(200).json({
       success: true,
       message: "Project updated!",
@@ -51,6 +51,11 @@ const updateProject = async (req, res) => {
     });
   }
 };
+
+const deleteTask = () => {
+
+}
+
 
 const deleteProject = async (req, res) => {
   try {
@@ -77,9 +82,20 @@ const getProjects = async (req, res) => {
   }
 };
 
+const getRecentProjects = async (req, res) => {
+  try {
+    const projects = await Project.find({}).sort({date: -1}).limit(4);
+    return res.status(200).json({ success: true, data: projects });
+  } catch (error) {
+    return res.status(400).json({ success: false, error });
+  }
+};
+
 module.exports = {
   createProject,
-  updateProject,
+  addTask,
+  deleteTask,
   deleteProject,
   getProjects,
+  getRecentProjects
 };

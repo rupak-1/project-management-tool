@@ -5,8 +5,10 @@ const ProjectController = require("../controllers/project-controller");
 const router = express.Router();
 
 router.post("/project", verifyToken, ProjectController.createProject);
-router.put("/project/:id", verifyToken, ProjectController.updateProject);
+router.put("/project/task", verifyToken, ProjectController.addTask);
+router.delete("/project/task", verifyToken, ProjectController.deleteTask);
 router.delete("/project/:id", verifyToken, ProjectController.deleteProject);
 router.get("/projects", verifyToken, ProjectController.getProjects);
+router.get("/projects/recent", verifyToken, ProjectController.getRecentProjects)
 
 module.exports = router;

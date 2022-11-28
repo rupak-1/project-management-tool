@@ -1,18 +1,51 @@
-import React from 'react'
+import React, {useState} from 'react'
 import List from '../components/List'
 import Navigation from '../components/Navigation'
 import ProjectHeading from '../components/ProjectHeading'
 import {useParams} from "react-router-dom"
+import { useEffect } from 'react'
 
 function ProjectPage() {
-  const [Task, SetTasks]  = useState()
-  console.log(useParams());
+  const [task, setTasks]  = useState()
+  const projectId = useParams();  
   const token = localStorage.getItem("Token")
-  fetch(`http://localhost:5001/project/${useParams}`, {
-    method: "POST",
-    body: JSON.stringify()
 
-  })
+ 
+  fetch(`http://localhost:5001/project/${projectId.id}`,{
+    method: "GET",
+    headers: {'Content-Type': 'application/json', 'authorization': token}
+   }).then(res => res.json()).then(data => {
+    if(data.success){
+      setTasks(data.data.tasks)
+    }
+   })
+
+
+  // fetch("http://localhost:5001/project"{
+  //   method: "GET",
+  //   body: JSON.stringify({
+  //     _id:useParams
+  //   }),
+  //   headers: {'Content-Type': 'application/json', 'authorization': token}
+  //   .then(res => res.json())
+  //   .then(data =>{
+  //     if(data.success){
+  //       setTasks(data.data.tasks)
+  //     }
+  //   })
+  // }
+
+  // } )
+
+
+  // fetch(`http://localhost:5001/project/tasks`, {
+  //   method: "POST",
+  //   body: JSON.stringify({
+  //     _id: useParams,
+  //     {description: }
+  //   })
+
+  // })
   
   return (
     <>

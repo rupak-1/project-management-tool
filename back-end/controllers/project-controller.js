@@ -82,6 +82,15 @@ const getProjects = async (req, res) => {
   }
 };
 
+const getProject = async (req, res) => {
+  try {
+    const projects = await Project.find({_id: req.params.id});
+    return res.status(200).json({ success: true, data: projects });
+  } catch (error) {
+    return res.status(400).json({ success: false, error });
+  }
+};
+
 const getRecentProjects = async (req, res) => {
   try {
     const projects = await Project.find({}).sort({date: -1}).limit(4);
@@ -97,5 +106,6 @@ module.exports = {
   deleteTask,
   deleteProject,
   getProjects,
+  getProject,
   getRecentProjects
 };

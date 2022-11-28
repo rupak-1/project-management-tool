@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { isExpired } from 'react-jwt';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -14,7 +14,7 @@ function Navigation() {
 
   const LogOut = () => {
     localStorage.removeItem("Token");
-    navigate("/dashboard");
+    navigate("/");
   }
 
   useEffect(() => {
@@ -49,8 +49,7 @@ function Navigation() {
                   <input type='search' placeholder='Search here' />
                 </div>
               </li>
-              <li className="nav-item dropdown ms-5">
-                <i type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className="nav-item ms-5">
                   <div className='user-wrapper d-flex align-items-center'>
                     <i class="fa-regular fa-circle-user"></i>
                     <div>
@@ -58,10 +57,9 @@ function Navigation() {
                       <h7>Member</h7>
                     </div>
                   </div>
-                </i>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><button class="btn btn-outline-secondary" onClick={LogOut}> Log Out</button></li>
-                </ul>
+              </li>
+              <li>
+                <li><button class="btn btn-outline-secondary ms-3" onClick={LogOut}> Log Out</button></li>
               </li>
             </ul>
           }
@@ -71,4 +69,4 @@ function Navigation() {
   )
 }
 
-export default Navigation
+export default Navigation;

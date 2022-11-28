@@ -38,7 +38,7 @@ const addTask = async (req, res) => {
   }
 
   try {
-    await Project.updateOne({_id: body.id}, {$push: body.task})
+    await Project.updateOne({_id: body._id}, {$push: body.task})
     return res.status(200).json({
       success: true,
       message: "Project updated!",
@@ -58,8 +58,9 @@ const deleteTask = () => {
 
 
 const deleteProject = async (req, res) => {
+  console.log(req.body)
   try {
-    const project = await Project.findOneAndDelete({ _id: req.params.id });
+    const project = await Project.findOneAndDelete({ _id: req.body._id});
 
     if (!project) {
       return res
@@ -75,7 +76,7 @@ const deleteProject = async (req, res) => {
 
 const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find({});
+    const projects = await Project.find({creator_id: req.params.id});
     return res.status(200).json({ success: true, data: projects });
   } catch (error) {
     return res.status(400).json({ success: false, error });
@@ -84,7 +85,7 @@ const getProjects = async (req, res) => {
 
 const getRecentProjects = async (req, res) => {
   try {
-    const projects = await Project.find({}).sort({date: -1}).limit(4);
+    const projects = await Project.find({creator_id: req.params.id}).sort({updatedAt: -1}).limit(4);
     return res.status(200).json({ success: true, data: projects });
   } catch (error) {
     return res.status(400).json({ success: false, error });

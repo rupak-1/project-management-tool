@@ -1,14 +1,17 @@
 import { useState, useRef } from 'react';
-import { Modal } from 'bootstrap';
+import { decodeToken } from 'react-jwt';
 
 function DropForm(props) {
+    const token = localStorage.getItem("Token");
+    const decodedToken = decodeToken(token);
+
     const projectFormInitialData = {
         title: '',
         description: '',
         tasks: [],
         deadline: '',
+        creator_id: decodedToken._id
     }
-
 
     const ref = useRef(null);
 
@@ -34,14 +37,14 @@ function DropForm(props) {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
+                    console.log(data.data)
                     setProjectFormData(projectFormInitialData);
                     ref.current.click();
                     props.setRefresh();
                 }
             });
     }
-
-    console.log(props.setRefresh);
+        ;
 
     return (
         <>

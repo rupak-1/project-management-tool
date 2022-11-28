@@ -1,10 +1,28 @@
 import "./ProjectsTable.css";
+import {Link} from 'react-router-dom';
 
 function ProjectsTable(props) {
     const getDate = (date) => {
         const dateObj = new Date(date);
         const localDate = dateObj.toLocaleDateString();
         return localDate;
+    }
+
+    const handleDelete = async (id) => {
+        const token = localStorage.getItem("Token");
+
+        await fetch("http://localhost:5001/api/project", {
+            method: "DELETE",
+            body: JSON.stringify({ _id: id }),
+            headers: { 'Content-Type': 'application/json', 'authorization': token }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    props.setRefresh();
+                }
+            });
+
     }
     return (
 
@@ -24,12 +42,12 @@ function ProjectsTable(props) {
                     </thead>
                     <tbody>
                         {props.projects && props.projects.map((project) => {
-                            return (<tr>
-                                <td>{project.title}</td>
+                            return (<tr key={project._id}>
+                                <td><Link type="button" className="btn btn-outline-dark btn-sm" to={`/project/${project._id}`}>{project.title}</Link></td>
                                 <td>{getDate(project.createdAt)}</td>
                                 <td>{getDate(project.deadline)}</td>
                                 <td>
-                                    <i type="button" onClick={() => console.log("cccd")} class="fa-solid fa-trash ms-3"></i>
+                                    <i type="button" onClick={() => handleDelete(project._id)} class="fa-solid fa-trash ms-3"></i>
                                 </td>
                             </tr>)
                         })}

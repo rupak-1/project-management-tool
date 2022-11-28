@@ -3,17 +3,23 @@ import { useState, useEffect } from 'react';
 import { isExpired } from 'react-jwt';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
+import {useNavigate} from "react-router-dom";
+
+
 
 
 function Navigation() {
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  const LogOut = () => {
+    localStorage.removeItem("Token");
+    navigate("/dashboard");
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
-    console.log(token);
     if (!isExpired(token)) {
-      console.log("yay");
       setIsLoggedIn(true);
     }
   }, [])
@@ -54,9 +60,7 @@ function Navigation() {
                   </div>
                 </i>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                  <li><a className="dropdown-item" href="#">Something else here</a></li>
+                  <li><button class="btn btn-outline-secondary" onClick={LogOut}> Log Out</button></li>
                 </ul>
               </li>
             </ul>

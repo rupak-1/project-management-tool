@@ -7,7 +7,12 @@ import {useParams} from "react-router-dom"
 function ProjectPage() {
   const [Task, SetTasks]  = useState()
   console.log(useParams());
-  fetch(`http://localhost:5001/project/${}`)
+  const token = localStorage.getItem("Token")
+  fetch(`http://localhost:5001/project/${useParams}`, {
+    method: "POST",
+    body: JSON.stringify()
+
+  })
   
   return (
     <>

@@ -15,9 +15,9 @@ function Home() {
                     Manage better, Achieve More, Grow faster
                 </h2>
                 <p>There are no limits when a project is managed properly</p>
-                <LinkContainer to="/projects">
+                <LinkContainer to="/login">
                     <Button className="btn-home" variant='success'>
-                        Bulid Together! <i class="fa-sharp fa-solid fa-users"></i>
+                        Bulid Things! <i class="fa-sharp fa-solid fa-users"></i>
                     </Button>
                 </LinkContainer>
             </div>

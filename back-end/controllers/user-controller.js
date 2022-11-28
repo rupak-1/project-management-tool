@@ -9,7 +9,7 @@ const createUser = async (req, res) => {
   if (user) {
     return res
       .status(400)
-      .json({ success: false, error: "Email already exists" });
+      .json({ success: false, message: "Email already exists" });
   } else {
     const newUser = new User(req.body);
     // Hash password before saving in database
@@ -17,9 +17,9 @@ const createUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         newUser.password = hashedPassword;
         await newUser.save();
-        res.json(newUser)
+        res.json({"message": "Login Success", "error": null})
     } catch (error) {
-        res.json({success: false, error: "Error"})
+        res.json({success: false, error: error.message, message: "Login Failed"})
     }
   }
 };

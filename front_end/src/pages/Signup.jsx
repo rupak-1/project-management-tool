@@ -10,6 +10,7 @@ function Signup() {
   const [name, setName] = useState("");
   const [repassword, setRePassword] = useState("");
   const navigate = useNavigate();
+  const [fetchMessage, setFetchMessage] = useState('');
 
   function handleSignup(e){
     e.preventDefault();
@@ -30,8 +31,14 @@ function Signup() {
         alert(body.message)
       }
       else{
-        console.log(body);
-        navigate("/login")
+        console.log(body.message);
+        setFetchMessage(body.message);
+        setTimeout(() => {
+          setFetchMessage('')
+        }, 1500);
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
       }
     })
    }
@@ -62,6 +69,7 @@ function Signup() {
           <input type="password" className="form-control" id="exampleInputPassword1" onChange={e => setRePassword(e.target.value)} value={repassword} required/>
         </div>
         <button type="submit" className="btn btn-primary">Signup</button>
+        {fetchMessage && <h6 className="my-3">{fetchMessage}</h6>}
         <div className='py-4'>
           <p className='text-center'>
             Already have an account <Link to="/login">Login</Link>

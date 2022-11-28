@@ -2,16 +2,17 @@ import React, { useState, useEffect, useCallback } from 'react'
 import Navigation from '../components/Navigation'
 import ProjectsTable from '../components/ProjectsTable'
 import RecentProjects from '../components/RecentProjects'
-import axios from 'axios';
+import {decodeToken} from 'react-jwt';
 
 function Dashboard() {
   const [recentProjects, setRecentProjects] = useState();
   const [allProjects, setAllProjects] = useState();
   const [refresh, setRefresh] = useState(false);
-  const token = localStorage.getItem('Token');
+  const token = localStorage.getItem("Token");
+  const decodedToken = decodeToken(token);
 
   const getAllProjects = async () => {
-    await fetch("http://localhost:5001/api/projects", {
+    await fetch(`http://localhost:5001/api/projects/${decodedToken._id}`, {
       method: "GET",
       headers: { 'Content-Type': 'application/json', 'authorization': token }
     })
@@ -22,7 +23,7 @@ function Dashboard() {
   }
 
   const getRecentProjects = async () => {
-    await fetch("http://localhost:5001/api/projects/recent", {
+    await fetch(`http://localhost:5001/api/projects/recent/${decodedToken._id}`, {
       method: "GET",
       headers: { 'Content-Type': 'application/json', 'authorization': token }
     })

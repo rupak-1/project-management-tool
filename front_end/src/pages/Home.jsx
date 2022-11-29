@@ -8,7 +8,7 @@ function Home() {
     <>
     <Navigation />
     <Row>
-        <Col md={6} className="home-page-img"></Col>
+        <Col md={5} className="home-page-img mx-4 mt-4"></Col>
         <Col md={6} className="d-flex flex-direction-column align-items-center justify-content-center">
             <div>
                 <h2>

@@ -29,16 +29,19 @@ const createProject = async (req, res) => {
 
 const addTask = async (req, res) => {
   const body = req.body;
-
+  console.log(body);
   if (!body) {
     return res.status(400).json({
       success: false,
       error: "You must provide a body to update",
     });
   }
-
   try {
-    await Project.updateOne({_id: body._id}, {$push: body.task})
+    // await Project.updateOne({_id: body._id}, {$push: body.task});
+    const project = await Project.findOne({_id: body._id});
+    project.tasks.push(body.task);
+    project.save();
+    console.log(project);
     return res.status(200).json({
       success: true,
       message: "Project updated!",

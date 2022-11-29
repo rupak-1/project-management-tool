@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { isExpired } from 'react-jwt';
+import {decodeToken, isExpired } from 'react-jwt';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,10 @@ function Navigation() {
     localStorage.removeItem("Token");
     navigate("/");
   }
+
+  const token = localStorage.getItem("Token");
+  const decodedToken = decodeToken(token);
+
 
   useEffect(() => {
     const token = localStorage.getItem("Token");
@@ -42,7 +46,7 @@ function Navigation() {
               </li>
             </ul>
             :
-            <ul className="navbar-nav">
+            <ul className="navbar-nav d-flex align-items-center">
               <li className="nav-item me-5">
                 <div className='search-wrapper'>
                   <i className="fa-solid fa-magnifying-glass"></i>
@@ -53,13 +57,13 @@ function Navigation() {
                   <div className='user-wrapper d-flex align-items-center'>
                     <i class="fa-regular fa-circle-user"></i>
                     <div>
-                      <h5 className='mb-0'>John Doe</h5>
+                      <h5 className='mb-0'>{decodedToken.name}</h5>
                       <h7>Member</h7>
                     </div>
                   </div>
               </li>
               <li>
-                <li><button class="btn btn-outline-secondary ms-3" onClick={LogOut}> Log Out</button></li>
+                <li><button class="btn btn-outline-secondary ms-4" onClick={LogOut}> Log Out</button></li>
               </li>
             </ul>
           }

@@ -4,7 +4,8 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    overflow-x: hidden
+    overflow-x: hidden;
+    border-radius: 10%;
 }
 .btn-home{
     background-color: blue;

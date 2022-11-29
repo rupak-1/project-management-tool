@@ -1,11 +1,14 @@
 import React ,{useState} from 'react'
 import TextareaAutosize from 'react-textarea-autosize';
 import "./CreateTaskButton.css";
+import {useParams} from "react-router-dom"
+
 function CreateTaskButton() {
   const [formClosed, setFormClosed] = useState(true);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const projectId = useParams();  
+  const projectId = useParams().id;
+ 
   
   function handleClosed(){
     setFormClosed(false)

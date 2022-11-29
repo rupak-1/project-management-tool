@@ -10,7 +10,7 @@ function List(props) {
   function handledelete(item) {
     const token = localStorage.getItem("Token")
     fetch(`http://localhost:5001/api/project/task`, {
-      method: "PUT",
+      method: "DELETE",
       body: JSON.stringify({
         "_id": projectId,
         "task_id": item

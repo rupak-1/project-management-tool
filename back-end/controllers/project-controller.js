@@ -39,8 +39,10 @@ const addTask = async (req, res) => {
   try {
     // await Project.updateOne({_id: body._id}, {$push: body.task});
     const project = await Project.findOne({_id: body._id});
+
     project.tasks.push(body.task);
     project.save();
+    console.log(project);
     return res.status(200).json({
       success: true,
       message: "Project updated!",

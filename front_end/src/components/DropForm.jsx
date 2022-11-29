@@ -65,7 +65,7 @@ function DropForm(props) {
                                 </div>
                                 <div className="mb-3">
                                     <label for="ProjectDescription" className="form-label">Description</label>
-                                    <input type="text" className="form-control" id="ProjectDescription" name='description' value={projectFormData.description} onChange={handleInputChange} required={true} />
+                                    <textarea type="text" className="form-control" id="ProjectDescription" name='description' value={projectFormData.description} onChange={handleInputChange} required={true} />
                                 </div>
                                 <div className="mb-3">
                                     <label for="ProjectDeadline" className="form-label">Deadline</label>

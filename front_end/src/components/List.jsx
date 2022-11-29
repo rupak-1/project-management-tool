@@ -53,7 +53,7 @@ function List(props) {
                 </div>
                 <p className='btn-status'>{item.status}</p>
                 <p className="card-text">{item.description}</p>
-                {props.render && <a href="#" className="btn btn-primary text-right" onClick={() => handledelete(item._id)}><i className="fa-solid fa-trash"></i></a>}
+                {<a href="#" className="btn btn-primary text-right" onClick={() => handledelete(item._id)}><i className="fa-solid fa-trash"></i></a>}
               </div>
             </div>
           );

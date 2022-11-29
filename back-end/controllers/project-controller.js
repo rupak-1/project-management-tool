@@ -37,7 +37,7 @@ const addTask = async (req, res) => {
   }
   try {
     // await Project.updateOne({_id: body._id}, {$push: body.task});
-    const project = await Project.findOne({_id: body._id});
+    const project = await Project.findOne({ _id: body._id });
 
     project.tasks.push(body.task);
     project.save();
@@ -57,7 +57,7 @@ const addTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    const project = await Project.updateOne({_id: req.body._id}, {$pull: {tasks: {_id: req.body.task_id}}})
+    const project = await Project.updateOne({ _id: req.body._id }, { $pull: { tasks: { _id: req.body.task_id } } })
     if (!project) {
       return res
         .status(404)
@@ -72,11 +72,29 @@ const deleteTask = async (req, res) => {
 
 const editTask = async (req, res) => {
   try {
-    console.log("---------------------------------");
-    const project = await Project.findOne({_id: req.body._id});
-    console.log(project)
-    project.tasks.where({_id: req.body.task_id}).status = true; 
-    console.log(await Project.findOne({_id: req.body._id}));
+    // console.log("---------------------------------");
+    // const project = await Project.findOne({_id: req.body._id});
+    // console.log(project);
+    // console.log("---------------------------------");
+    // console.log(project.tasks.where({_id: req.body.task_id}))
+    // project.tasks.where({_id: req.body.task_id}).status = true; 
+    // console.log(project);
+
+    const findIndex = (arr, _id) => {
+      console.log(arr);
+      for (let i = 0; i < arr.length; i++) {
+
+        if (arr[i]._id == _id) {
+          return i;
+        }
+      }
+      return null;
+    }
+
+    const project = await Project.findOne({ _id: req.body._id });
+    const index = findIndex(project.tasks, req.body.task_id);
+    project.tasks.at(index).status = true;
+    project.save();
 
     if (!project) {
       return res
@@ -93,7 +111,7 @@ const editTask = async (req, res) => {
 
 const deleteProject = async (req, res) => {
   try {
-    const project = await Project.findOneAndDelete({ _id: req.body._id});
+    const project = await Project.findOneAndDelete({ _id: req.body._id });
 
     if (!project) {
       return res
@@ -109,7 +127,7 @@ const deleteProject = async (req, res) => {
 
 const getProjects = async (req, res) => {
   try {
-    const projects = await Project.find({creator_id: req.params.id});
+    const projects = await Project.find({ creator_id: req.params.id });
     return res.status(200).json({ success: true, data: projects });
   } catch (error) {
     return res.status(400).json({ success: false, error });
@@ -119,7 +137,7 @@ const getProjects = async (req, res) => {
 const getProject = async (req, res) => {
   console.log("gettttting protesldkjffffffsdfsdfsdf")
   try {
-    const project = await Project.findOne({_id:req.params.id});
+    const project = await Project.findOne({ _id: req.params.id });
     return res.status(200).json({ success: true, data: project });
   } catch (error) {
     return res.status(400).json({ success: false, error });
@@ -128,7 +146,7 @@ const getProject = async (req, res) => {
 
 const getRecentProjects = async (req, res) => {
   try {
-    const projects = await Project.find({creator_id: req.params.id}).sort({updatedAt: -1}).limit(4);
+    const projects = await Project.find({ creator_id: req.params.id }).sort({ updatedAt: -1 }).limit(4);
     return res.status(200).json({ success: true, data: projects });
   } catch (error) {
     return res.status(400).json({ success: false, error });

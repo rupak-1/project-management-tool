@@ -8,6 +8,16 @@ function RecentProjects(props) {
         const localDate = dateObj.toLocaleDateString();
         return localDate;
     }
+
+    const getCompletedTasks = (tasks) => {
+        let count = 0;
+        tasks.map((task) => {
+            if(task.status == true) {
+                count++;
+            }
+        })
+        return count;
+    }
     return (
         <div>
             <div className='d-flex justify-content-between mx-4 my-3'>
@@ -24,7 +34,7 @@ function RecentProjects(props) {
                             <div className="card-body bg-light">
                                 <p>{project.description}</p>
                                 <h6>Deadline: {getDate(project.deadline)}</h6>
-                                <h6>Tasks: {project.tasks.length}</h6>
+                                <h6>Tasks Completed: {getCompletedTasks(project.tasks)} / {project.tasks.length}</h6>
                                 <Link to={`/project/${project._id}`} className="btn btn-dark mt-2"><i className="fa-solid fa-right-long"></i></Link>
                             </div>
                         </div>

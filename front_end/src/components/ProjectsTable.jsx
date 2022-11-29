@@ -1,5 +1,5 @@
 import "./ProjectsTable.css";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ProjectsTable(props) {
     const getDate = (date) => {
@@ -34,8 +34,8 @@ function ProjectsTable(props) {
                 <table width="100%">
                     <thead>
                         <tr className="bg-dark">
-                            <td>Project Title</td>
-              getDate              <td> Project Started </td>
+                            <td>Project Title</td>         
+                            <td> Project Started </td>
                             <td>Deadline</td>
                             <td>Delete</td>
                         </tr>

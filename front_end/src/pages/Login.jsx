@@ -22,7 +22,10 @@ function Login() {
       body: JSON.stringify(user)
     }).then(res => res.json()).then((body) => {
       if (body.success === false) {
-        alert(body.message);
+        setFetchMessage(body.message);
+        setTimeout(() => {
+          setFetchMessage('')
+        }, 1500);
       }
       else {
         localStorage.setItem("Token", body.token);

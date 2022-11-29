@@ -44,8 +44,8 @@ function CreateTaskButton(props) {
       </div>}
       {!formClosed && <div className="card main-card">
         <div className="card-body">
-          <TextareaAutosize placeholder='Enter project title' autoFocus required onChange={e => setTitle(e.target.value)} style={{ resize: "none", width: "100%", overflow: "hidden" }} />
-          <TextareaAutosize placeholder='Enter project description' required onChange={e => setDescription(e.target.value)} style={{ resize: "none", width: "100%", overflow: "hidden" }} />
+          <TextareaAutosize placeholder='Enter task title' autoFocus required onChange={e => setTitle(e.target.value)} style={{ resize: "none", width: "100%", overflow: "hidden" }} />
+          <TextareaAutosize placeholder='Enter task description' required onChange={e => setDescription(e.target.value)} style={{ resize: "none", width: "100%", overflow: "hidden" }} />
           <a href="#" className="btn btn-primary" onClick={handleCreate}>Create Task</a>
         </div>
       </div>}

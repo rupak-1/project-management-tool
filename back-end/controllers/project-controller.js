@@ -28,7 +28,6 @@ const createProject = async (req, res) => {
 };
 
 const addTask = async (req, res) => {
-  console.log("Adddddddddddddddddddddddddddddddddd")
   const body = req.body;
   if (!body) {
     return res.status(400).json({
@@ -57,7 +56,6 @@ const addTask = async (req, res) => {
 const deleteTask = async (req, res) => {
   try {
     const project = await Project.updateOne({_id: req.body._id}, {$pull: {tasks: {_id: req.body.task_id}}})
-
     if (!project) {
       return res
         .status(404)
@@ -73,8 +71,9 @@ const deleteTask = async (req, res) => {
 const editTask = async (req, res) => {
   try {
     const project = await Project.findOne({_id: req.body._id});
-    project.tasks.where({_id: req.body.task_id}).status = true;
-    console.log(project);
+    console.log(project)
+    project.tasks.where({_id: req.body.task_id}).status = true; 
+    console.log(await Project.findOne({_id: req.body._id}));
 
     if (!project) {
       return res

@@ -95,7 +95,7 @@ const loginUser = (req, res) => {
   User.findOne({ email }).then((user) => {
     // Check if user exists
     if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
+      return res.status(404).json({success: false, message: "invalid email or password" });
     }
 
     // Check password
@@ -128,7 +128,7 @@ const loginUser = (req, res) => {
       } else {
         return res
           .status(400)
-          .json({ message: "Password incorrect" });
+          .json({success: false, message: "invalid email or password" });
       }
     });
   });

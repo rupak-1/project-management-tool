@@ -14,7 +14,7 @@ function Navigation() {
 
   const LogOut = () => {
     localStorage.removeItem("Token");
-    navigate("/homepage");
+     window.location.replace("/");
   }
 
   const token = localStorage.getItem("Token");

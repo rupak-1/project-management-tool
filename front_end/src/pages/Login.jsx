@@ -21,8 +21,8 @@ function Login() {
       },
       body: JSON.stringify(user)
     }).then(res => res.json()).then((body) => {
-      if (body.status === 400) {
-        alert(body.message)
+      if (body.success === false) {
+        alert(body.message);
       }
       else {
         localStorage.setItem("Token", body.token);

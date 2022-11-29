@@ -9,7 +9,7 @@ function List(props) {
 
   function handledelete(item) {
     const token = localStorage.getItem("Token")
-    fetch(`http://localhost:5001/api/project/task`, {
+    fetch(`http://localhost:5001/api/project/task/`, {
       method: "DELETE",
       body: JSON.stringify({
         "_id": projectId,
@@ -25,16 +25,17 @@ function List(props) {
 
   function handleEdit(item){
     const token = localStorage.getItem("Token")
-    fetch(`http://localhost:5001/api/project/task`, {
+    fetch(`http://localhost:5001/api/project/task/edit`, {
       method: "PUT",
       body: JSON.stringify({
         "_id": projectId,
         "task_id": item
-      }).then(res => res.json()).then(data => {
-        if(data.success){
-          props.setRefresh()
-        }
-      })
+      }),
+      headers: { 'Content-Type': 'application/json', 'authorization': token }
+    }).then(res => res.json()).then(data =>{
+      if(data.success){
+        props.setRefresh();
+      }
     })
   }
 

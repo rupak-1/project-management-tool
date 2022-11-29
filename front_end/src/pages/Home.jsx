@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation';
 import {LinkContainer} from "react-router-bootstrap";
 import "./Home.css";
 function Home() {
+  const Token = localStorage.getItem("Token");
   return (
     <>
     <Navigation />

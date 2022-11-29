@@ -4,7 +4,6 @@ import Navigation from '../components/Navigation'
 import ProjectHeading from '../components/ProjectHeading'
 import { useParams } from "react-router-dom"
 import { useEffect } from 'react'
-import "./ProjectPage.css"
 
 function ProjectPage() {
   const todoIntial = []

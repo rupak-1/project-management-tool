@@ -20,13 +20,14 @@ function ProjectPage() {
       headers: { 'Content-Type': 'application/json', 'authorization': token }
     }).then(res => res.json()).then(json => {
       if (json.success) {
-        setTasks(json.data.tasks);
+        console.log(json.data)
+        setTasks((prev) => [...prev, ...json.data.tasks]);
         setCurrentProject(json.data);
         const completedTasks = tasks.filter((task) => task.status === true)
-        setComplete(completedTasks)
+        setComplete((prev) => [...prev, ...completedTasks])
 
         const notCompletedTasks = tasks.filter((task) => task.status !== true)
-        setTodo(notCompletedTasks);
+        setTodo((prev) => [...prev, ...notCompletedTasks]);
       }
     })
   }, [refresh])

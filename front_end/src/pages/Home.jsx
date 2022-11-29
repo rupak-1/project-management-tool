@@ -17,7 +17,7 @@ function Home() {
                 <p>There are no limits when a project is managed properly</p>
                 <LinkContainer to="/login">
                     <Button className="btn-home" variant='secondary'>
-                        Bulid Things! <i class="fa-sharp fa-solid fa-users"></i>
+                        Bulid Things! <i className="fa-sharp fa-solid fa-users"></i>
                     </Button>
                 </LinkContainer>
             </div>

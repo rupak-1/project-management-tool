@@ -48,7 +48,7 @@ function Navigation() {
             :
             <ul className="navbar-nav d-flex align-items-center">
               <li className='nav-item me-5'>
-                <Link to='/dashboard' className='text-secondary'><i class="fa-solid fa-table-columns"></i></Link>
+                <Link to='/dashboard' className='text-secondary'><i className="fa-solid fa-table-columns"></i></Link>
               </li>
               <li className="nav-item me-5">
                 <div className='search-wrapper text-secondary'>
@@ -57,16 +57,16 @@ function Navigation() {
                 </div>
               </li>
               <li className="nav-item">
-                <div class="dropdown text-secondary">
+                <div className="dropdown text-secondary">
                   <div className='user-wrapper d-flex align-items-center dropdown-toggle' type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-regular fa-circle-user"></i>
+                    <i className="fa-regular fa-circle-user"></i>
                     <div>
                       <h5 className='mb-0'>{decodedToken.name}</h5>
                       <h7>Member</h7>
                     </div>
                   </div>
-                  <div class="dropdown-menu bg-light">
-                    <button class="btn btn-outline-secondary ms-4" onClick={LogOut}> Log Out</button>
+                  <div className="dropdown-menu bg-light">
+                    <button className="btn btn-outline-secondary ms-4" onClick={LogOut}> Log Out</button>
                   </div>
                 </div>
               </li>

@@ -35,7 +35,7 @@ function ProjectsTable(props) {
                     <thead>
                         <tr className="bg-dark">
                             <td>Project Title</td>
-                            <td> Project Started </td>
+              getDate              <td> Project Started </td>
                             <td>Deadline</td>
                             <td>Delete</td>
                         </tr>
@@ -47,7 +47,7 @@ function ProjectsTable(props) {
                                 <td>{getDate(project.createdAt)}</td>
                                 <td>{getDate(project.deadline)}</td>
                                 <td>
-                                    <i type="button" onClick={() => handleDelete(project._id)} class="fa-solid fa-trash ms-3"></i>
+                                    <i type="button" onClick={() => handleDelete(project._id)} className="fa-solid fa-trash ms-3"></i>
                                 </td>
                             </tr>)
                         })}

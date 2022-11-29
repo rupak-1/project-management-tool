@@ -10,7 +10,7 @@ function List(props) {
   function handledelete(item) {
     const token = localStorage.getItem("Token")
     fetch(`http://localhost:5001/api/project/task`, {
-      method: "DELETE",
+      method: "PUT",
       body: JSON.stringify({
         "_id": projectId,
         "task_id": item
@@ -23,36 +23,21 @@ function List(props) {
     })
   }
 
-  function handleEdit(item){
-    const token = localStorage.getItem("Token")
-    fetch(`http://localhost:5001/api/project/task`, {
-      method: "PUT",
-      body: JSON.stringify({
-        "_id": projectId,
-        "task_id": item
-      }).then(res => res.json()).then(data => {
-        if(data.success){
-          props.setRefresh()
-        }
-      })
-    })
-  }
-
   return (
     <>
       <div className='boxy'>
         {props.render && <CreateTaskButton setRefresh={() => props.setRefresh()} />}
         {props.todo.map((item, index) => {
           return (
-            <div className="card main-card bg-light mb-3">
+            <div className="card main-card">
               <div className="card-body">
                 <div className='title-properties'>
                   <h5 className="card-title">{item.title} </h5>
-                  {props.render && <button onClick={() => handleEdit(item._id)}><i class="fa-solid fa-check-to-slot"></i> </button>}
+                  {props.render && <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>}
                 </div>
                 <p className='btn-status'>{item.status}</p>
                 <p className="card-text">{item.description}</p>
-                {props.render && <a href="#" className="btn btn-primary text-right" onClick={() => handledelete(item._id)}><i className="fa-solid fa-trash"></i></a>}
+                {props.render && <a href="#" className="btn btn-primary" onClick={() => handledelete(item._id)}><i className="fa-solid fa-trash"></i></a>}
               </div>
             </div>
           );

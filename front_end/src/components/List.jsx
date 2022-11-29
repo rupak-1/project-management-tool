@@ -2,28 +2,48 @@ import React from 'react'
 import CreateTaskButton from './CreateTaskButton';
 import Example from './Example';
 import "./List.css";
+import { useParams } from "react-router-dom"
 
 function List(props) {
   console.log(props);
+  const projectId = useParams().id;
+
+  function handledelete(item) {
+    const token = localStorage.getItem("Token")
+    fetch(`http://localhost:5001/api/project/task`, {
+      method: "DELETE",
+      body: JSON.stringify({
+        "_id": projectId,
+        "task_id": item
+      }),
+      headers: { 'Content-Type': 'application/json', 'authorization': token }
+    }).then(res => res.json()).then(data => {
+      if (data.success) {
+      }
+    })
+  }
+
   return (
     <>
-      {/* TODO : create task button should condtionally render depending on the type of list it is */}
-      <CreateTaskButton />
-      {props.completed && props.notCompleted.map((item) => {
-        return (
-          <div className="card main-card">
-            <div className="card-body">
-              <div className='title-properties'>
-                <h5 className="card-title">Card title </h5>
-                <Example />
+      <div className='boxy'>
+        {props.render && <CreateTaskButton />}
+        {props.todo.map((item, index) => {
+          return (
+            <div className="card main-card">
+              <div className="card-body">
+                <div className='title-properties'>
+                  <h5 className="card-title">{item.title} </h5>
+                  {props.render && <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>}
+                </div>
+                <p className='btn-status'>{item.status}</p>
+                <p className="card-text">{item.description}</p>
+                {props.render && <a href="#" className="btn btn-primary" onClick={() => handledelete(item._id)}><i className="fa-solid fa-trash"></i></a>}
               </div>
-              <p className='btn-status'>Status</p>
-              <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" className="btn btn-primary"><i className="fa-solid fa-trash"></i></a>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
+
     </>
   )
 }

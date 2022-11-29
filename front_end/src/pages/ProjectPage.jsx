@@ -21,18 +21,18 @@ function ProjectPage() {
       if (data.success) {
         setTasks(data.data.tasks);
         setCurrentProject(data.data);
-        initialTaskSetup();
+        const completedTasks = task.filter((task) => task.status === true)
+        setComplete(completedTasks)
+        console.log(complete)
+        const notCompletedTasks = task.filter((task) => task.status !== true)
+        setTodo(notCompletedTasks);
+        console.log(todo)
       }
     })
-  }, [])
+  }, [complete,task,todo, projectId.id, token])
 
 
-  const initialTaskSetup = () => {
-    const completedTasks = task.filter((task) => task.status === true)
-    setComplete(completedTasks)
-    const notCompletedTasks = task.filter((task) => task.status !== true)
-    setTodo(notCompletedTasks);
-  }
+  
 
 
 
@@ -50,13 +50,13 @@ function ProjectPage() {
           <ProjectHeading heading="Task" />
         </div>
         <div className='row d-flex align-items-center mt-4 mb-4'>
-          <List notCompleted={todo}/>
+          <List todo={todo} render={true}/>
         </div>
         <div className="row d-flex align-items-center mt-4 mb-4">
           <ProjectHeading heading="Completed" />
         </div>
         <div className='row d-flex align-items-center mt-4 mb-4'>
-          {/* <List completed={complete}/> */}
+          <List todo={complete} render={false}/>
         </div>
       </div>
     </>

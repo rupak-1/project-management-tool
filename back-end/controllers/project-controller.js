@@ -72,7 +72,6 @@ const deleteTask = async (req, res) => {
 
 const editTask = async (req, res) => {
   try {
-    console.log("---------------------------------");
     const project = await Project.findOne({_id: req.body._id});
     project.tasks.where({_id: req.body.task_id}).status = true;
     console.log(project);
@@ -116,9 +115,9 @@ const getProjects = async (req, res) => {
 };
 
 const getProject = async (req, res) => {
-  console.log("gettttting protesldkjffffffsdfsdfsdf")
   try {
     const project = await Project.findOne({_id:req.params.id});
+    console.log(project)
     return res.status(200).json({ success: true, data: project });
   } catch (error) {
     return res.status(400).json({ success: false, error });

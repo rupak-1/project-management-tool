@@ -38,7 +38,7 @@ function CreateTaskButton(props) {
 
   return (
     <>
-      {formClosed && <div className="d-sm-flex" onClick={handleClosed} style={{ cursor: "pointer" }} >
+      {formClosed && <div className="d-flex justify-content-center align-items-center" onClick={handleClosed} style={{ cursor: "pointer" }} >
         <i className="fa-solid fa-plus" />
         <p className='text-content'>add another task</p>
       </div>}

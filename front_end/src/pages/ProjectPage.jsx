@@ -22,10 +22,13 @@ function ProjectPage() {
       headers: { 'Content-Type': 'application/json', 'authorization': token }
     }).then(res => res.json()).then(json => {
       if (json.success) {
+        setTasks(json.data.tasks);
         setCurrentProject(json.data);
-        console.log(json.data.tasks);
-        updateStateComplete(json.data.tasks)
-        updateStateTodo(json.data.tasks)
+        const completedTasks = tasks.filter((task) => task.status === true)
+        setComplete(completedTasks)
+
+        const notCompletedTasks = tasks.filter((task) => task.status !== true)
+        setTodo(notCompletedTasks);
       }
     })
   }, [refresh])

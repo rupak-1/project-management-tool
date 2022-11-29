@@ -27,7 +27,7 @@ function List(props) {
   return (
     <>
       <div className='boxy'>
-        {props.render && <CreateTaskButton />}
+        {props.render && <CreateTaskButton setRefresh={() => props.setRefresh()} />}
         {props.todo.map((item, index) => {
           return (
             <div className="card main-card">

@@ -6,9 +6,11 @@ import { useParams } from "react-router-dom"
 import { useEffect } from 'react'
 
 function ProjectPage() {
-  const [tasks, setTasks] = useState([])
-  const [todo, setTodo] = useState([])
-  const [complete, setComplete] = useState([])
+  const todoIntial = []
+  const taskInitial = []
+  const completeInitial = []
+  const [todo, setTodo] = useState(todoIntial)
+  const [complete, setComplete] = useState(completeInitial)
   const [currentProject, setCurrentProject] = useState({});
   const [refresh, setRefresh] = useState(false);
   const projectId = useParams();
@@ -20,24 +22,33 @@ function ProjectPage() {
       headers: { 'Content-Type': 'application/json', 'authorization': token }
     }).then(res => res.json()).then(json => {
       if (json.success) {
-        setTasks(json.data.tasks);
         setCurrentProject(json.data);
-        const completedTasks = tasks.filter((task) => task.status === true)
-        setComplete(completedTasks)
-
-        const notCompletedTasks = tasks.filter((task) => task.status !== true)
-        setTodo(notCompletedTasks);
+        console.log(json.data.tasks);
+        updateStateComplete(json.data.tasks)
+        updateStateTodo(json.data.tasks)
       }
     })
   }, [refresh])
 
+  function updateStateComplete(value){
+    const newState =  []
+     for (let i = 0; i < value.length; i++){
+      if (value[i].status == true){
+        newState.push(value[i])
+      }
+     }
+    setComplete(newState);
+  }
 
-  
-
-
-
-
-
+  function updateStateTodo(value){
+    const newState =  []
+    for (let i = 0; i < value.length; i++){
+     if (value[i].status == false){
+       newState.push(value[i])
+     }
+    }
+    setTodo(newState);
+  }
 
   return (
     <>

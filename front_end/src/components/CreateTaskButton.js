@@ -3,7 +3,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import "./CreateTaskButton.css";
 import { useParams } from "react-router-dom"
 
-function CreateTaskButton() {
+function CreateTaskButton(props) {
   const [formClosed, setFormClosed] = useState(true);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -31,6 +31,7 @@ function CreateTaskButton() {
     }).then(res => res.json()).then(data => {
       if (data.success) {
         handleSubmit()
+        props.setRefresh()
       }
     })
   }

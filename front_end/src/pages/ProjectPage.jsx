@@ -4,7 +4,6 @@ import Navigation from '../components/Navigation'
 import ProjectHeading from '../components/ProjectHeading'
 import { useParams } from "react-router-dom"
 import { useEffect } from 'react'
-import "./ProjectPage.css"
 
 function ProjectPage() {
   const todoIntial = []
@@ -23,8 +22,7 @@ function ProjectPage() {
     }).then(res => res.json()).then(json => {
       if (json.success) {
         setCurrentProject(json.data);
-        console.log(json.data.tasks);
-        updateStateComplete(json.data.tasks);
+        updateStateComplete(json.data.tasks)
         updateStateTodo(json.data.tasks)
       }
     })
@@ -33,7 +31,7 @@ function ProjectPage() {
   function updateStateComplete(value){
     const newState =  []
      for (let i = 0; i < value.length; i++){
-      if (value[i] != null && value[i].status == true){
+      if (value[i].status == true){
         newState.push(value[i])
       }
      }
@@ -43,7 +41,7 @@ function ProjectPage() {
   function updateStateTodo(value){
     const newState =  []
     for (let i = 0; i < value.length; i++){
-     if (value[i] != null && value[i].status == false){
+     if (value[i].status == false){
        newState.push(value[i])
      }
     }
@@ -61,13 +59,13 @@ function ProjectPage() {
           <ProjectHeading heading="Task" />
         </div>
         <div className='row d-flex align-items-center mt-4 mb-4'>
-          <List todo={todo} render={true} setRefresh={() => setRefresh(!refresh)}/>
+          <List todo={getTasks(false)} render={true} setRefresh={() => setRefresh(!refresh)}/>
         </div>
         <div className="row d-flex align-items-center mt-4 mb-4">
           <ProjectHeading heading="Completed" />
         </div>
         <div className='row d-flex align-items-center mt-4 mb-4'>
-          <List todo={complete} render={false}setRefresh={() => setRefresh(!refresh)}/>
+          <List todo={getTasks(true)} render={false}setRefresh={() => setRefresh(!refresh)}/>
         </div>
       </div>
     </>

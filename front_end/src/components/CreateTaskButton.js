@@ -3,7 +3,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import "./CreateTaskButton.css";
 import { useParams } from "react-router-dom"
 
-function CreateTaskButton() {
+function CreateTaskButton(props) {
   const [formClosed, setFormClosed] = useState(true);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -31,13 +31,14 @@ function CreateTaskButton() {
     }).then(res => res.json()).then(data => {
       if (data.success) {
         handleSubmit()
+        props.setRefresh()
       }
     })
   }
 
   return (
     <>
-      {formClosed && <div className="d-sm-flex" onClick={handleClosed} style={{ cursor: "pointer" }} >
+      {formClosed && <div className="d-flex justify-content-center align-items-center" onClick={handleClosed} style={{ cursor: "pointer" }} >
         <i className="fa-solid fa-plus" />
         <p className='text-content'>add another task</p>
       </div>}

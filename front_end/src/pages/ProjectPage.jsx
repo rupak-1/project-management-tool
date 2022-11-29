@@ -4,9 +4,13 @@ import Navigation from '../components/Navigation'
 import ProjectHeading from '../components/ProjectHeading'
 import { useParams } from "react-router-dom"
 import { useEffect } from 'react'
+import "./ProjectPage.css"
 
 function ProjectPage() {
-  const [tasks, setTasks] = useState([])
+  const todoIntial = []
+  const completeInitial = []
+  const [todo, setTodo] = useState(todoIntial)
+  const [complete, setComplete] = useState(completeInitial)
   const [currentProject, setCurrentProject] = useState({});
   const [refresh, setRefresh] = useState(false);
   const projectId = useParams();
@@ -18,37 +22,33 @@ function ProjectPage() {
       headers: { 'Content-Type': 'application/json', 'authorization': token }
     }).then(res => res.json()).then(json => {
       if (json.success) {
-        console.log({...json.data})
-        setTasks(json.tasks);
-        console.log(tasks);
-        setCurrentProject((prev) => {
-          const modified = JSON.parse(Object.assign({}, json.data))
-          console.log("Sf" + modified);
-          console.log({a: 3})
-          return {...prev, ...json.data}
-        })
-        console.log(currentProject);
-        // const completedTasks = tasks.filter((task) => task.status === true)
-        // setComplete((prev) => [...prev, ...completedTasks])
-
-        // const notCompletedTasks = tasks.filter((task) => task.status !== true)
-        // setTodo((prev) => [...prev, ...notCompletedTasks]);
-        // console.log(completedTasks);
-        // console.log(notCompletedTasks);
+        setCurrentProject(json.data);
+        console.log(json.data.tasks);
+        updateStateComplete(json.data.tasks);
+        updateStateTodo(json.data.tasks)
       }
     })
   }, [refresh])
 
-
-  const getTasks = (completed) => {
-    if (!currentProject || !currentProject.tasks) return []
-    return currentProject.tasks.filter((task) => task.status === completed)
+  function updateStateComplete(value){
+    const newState =  []
+     for (let i = 0; i < value.length; i++){
+      if (value[i] != null && value[i].status == true){
+        newState.push(value[i])
+      }
+     }
+    setComplete(newState);
   }
 
-
-
-
-
+  function updateStateTodo(value){
+    const newState =  []
+    for (let i = 0; i < value.length; i++){
+     if (value[i] != null && value[i].status == false){
+       newState.push(value[i])
+     }
+    }
+    setTodo(newState);
+  }
 
   return (
     <>

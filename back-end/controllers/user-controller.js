@@ -17,7 +17,7 @@ const createUser = async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         newUser.password = hashedPassword;
         await newUser.save();
-        res.json({"message": "Login Success", "error": null})
+        res.json({"message": "Signup Success", "error": null})
     } catch (error) {
         res.json({success: false, error: error.message, message: "Login Failed"})
     }
@@ -119,6 +119,7 @@ const loginUser = (req, res) => {
           (err, token) => {
             res.json({
               success: true,
+              message: "Login Successful",
               token: "Bearer " + token,
               data: payload,
             });
@@ -127,7 +128,7 @@ const loginUser = (req, res) => {
       } else {
         return res
           .status(400)
-          .json({ passwordincorrect: "Password incorrect" });
+          .json({ message: "Password incorrect" });
       }
     });
   });

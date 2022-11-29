@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {decodeToken, isExpired } from 'react-jwt';
+import { decodeToken, isExpired } from 'react-jwt';
 import { Link } from 'react-router-dom';
 import './Navigation.css';
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ function Navigation() {
 
   const LogOut = () => {
     localStorage.removeItem("Token");
-    navigate("/");
+    navigate("/homepage");
   }
 
   const token = localStorage.getItem("Token");
@@ -47,23 +47,28 @@ function Navigation() {
             </ul>
             :
             <ul className="navbar-nav d-flex align-items-center">
+              <li className='nav-item me-5'>
+                <Link to='/dashboard' className='text-secondary'><i class="fa-solid fa-table-columns"></i></Link>
+              </li>
               <li className="nav-item me-5">
-                <div className='search-wrapper'>
+                <div className='search-wrapper text-secondary'>
                   <i className="fa-solid fa-magnifying-glass"></i>
                   <input type='search' placeholder='Search here' />
                 </div>
               </li>
-              <li className="nav-item ms-5">
-                  <div className='user-wrapper d-flex align-items-center'>
+              <li className="nav-item">
+                <div class="dropdown text-secondary">
+                  <div className='user-wrapper d-flex align-items-center dropdown-toggle' type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-regular fa-circle-user"></i>
                     <div>
                       <h5 className='mb-0'>{decodedToken.name}</h5>
                       <h7>Member</h7>
                     </div>
                   </div>
-              </li>
-              <li>
-                <li><button class="btn btn-outline-secondary ms-4" onClick={LogOut}> Log Out</button></li>
+                  <div class="dropdown-menu bg-light">
+                    <button class="btn btn-outline-secondary ms-4" onClick={LogOut}> Log Out</button>
+                  </div>
+                </div>
               </li>
             </ul>
           }

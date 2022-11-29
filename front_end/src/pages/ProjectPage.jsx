@@ -6,10 +6,11 @@ import { useParams } from "react-router-dom"
 import { useEffect } from 'react'
 
 function ProjectPage() {
-  const [task, setTasks] = useState([])
+  const [tasks, setTasks] = useState([])
   const [todo, setTodo] = useState([])
   const [complete, setComplete] = useState([])
   const [currentProject, setCurrentProject] = useState({});
+  const [refresh, setRefresh] = useState(false);
   const projectId = useParams();
   const token = localStorage.getItem("Token")
 
@@ -17,19 +18,18 @@ function ProjectPage() {
     fetch(`http://localhost:5001/api/project/${projectId.id}`, {
       method: "GET",
       headers: { 'Content-Type': 'application/json', 'authorization': token }
-    }).then(res => res.json()).then(data => {
-      if (data.success) {
-        setTasks(data.data.tasks);
-        setCurrentProject(data.data);
-        const completedTasks = task.filter((task) => task.status === true)
+    }).then(res => res.json()).then(json => {
+      if (json.success) {
+        setTasks(json.data.tasks);
+        setCurrentProject(json.data);
+        const completedTasks = tasks.filter((task) => task.status === true)
         setComplete(completedTasks)
-        console.log(complete)
-        const notCompletedTasks = task.filter((task) => task.status !== true)
+
+        const notCompletedTasks = tasks.filter((task) => task.status !== true)
         setTodo(notCompletedTasks);
-        console.log(todo)
       }
     })
-  }, [complete,task,todo, projectId.id, token])
+  }, [refresh])
 
 
   
@@ -50,13 +50,13 @@ function ProjectPage() {
           <ProjectHeading heading="Task" />
         </div>
         <div className='row d-flex align-items-center mt-4 mb-4'>
-          <List todo={todo} render={true}/>
+          <List todo={todo} render={true} setRefresh={() => setRefresh(!refresh)}/>
         </div>
         <div className="row d-flex align-items-center mt-4 mb-4">
           <ProjectHeading heading="Completed" />
         </div>
         <div className='row d-flex align-items-center mt-4 mb-4'>
-          <List todo={complete} render={false}/>
+          <List todo={complete} render={false}setRefresh={() => setRefresh(!refresh)}/>
         </div>
       </div>
     </>

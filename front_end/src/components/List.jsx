@@ -19,6 +19,7 @@ function List(props) {
       headers: { 'Content-Type': 'application/json', 'authorization': token }
     }).then(res => res.json()).then(data => {
       if (data.success) {
+        props.setRefresh();
       }
     })
   }

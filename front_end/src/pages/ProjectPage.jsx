@@ -7,7 +7,6 @@ import { useEffect } from 'react'
 
 function ProjectPage() {
   const todoIntial = []
-  const taskInitial = []
   const completeInitial = []
   const [todo, setTodo] = useState(todoIntial)
   const [complete, setComplete] = useState(completeInitial)
@@ -22,13 +21,9 @@ function ProjectPage() {
       headers: { 'Content-Type': 'application/json', 'authorization': token }
     }).then(res => res.json()).then(json => {
       if (json.success) {
-        setTasks(json.data.tasks);
         setCurrentProject(json.data);
-        const completedTasks = tasks.filter((task) => task.status === true)
-        setComplete(completedTasks)
-
-        const notCompletedTasks = tasks.filter((task) => task.status !== true)
-        setTodo(notCompletedTasks);
+        updateStateComplete(json.data.tasks)
+        updateStateTodo(json.data.tasks)
       }
     })
   }, [refresh])

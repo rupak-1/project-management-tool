@@ -59,19 +59,19 @@ function DropForm(props) {
                         </div>
                         <div className="modal-body">
                             <form onSubmit={handleSubmit}>
-                                <div class="mb-3">
-                                    <label for="ProjectTitle" class="form-label">Project Title</label>
-                                    <input type="text" class="form-control" id="ProjectTitle" aria-describedby="Project" name='title' value={projectFormData.title} onChange={handleInputChange} required={true} />
+                                <div className="mb-3">
+                                    <label for="ProjectTitle" className="form-label">Project Title</label>
+                                    <input type="text" className="form-control" id="ProjectTitle" aria-describedby="Project" name='title' value={projectFormData.title} onChange={handleInputChange} required={true} />
                                 </div>
-                                <div class="mb-3">
-                                    <label for="ProjectDescription" class="form-label">Description</label>
-                                    <input type="text" class="form-control" id="ProjectDescription" name='description' value={projectFormData.description} onChange={handleInputChange} required={true} />
+                                <div className="mb-3">
+                                    <label for="ProjectDescription" className="form-label">Description</label>
+                                    <input type="text" className="form-control" id="ProjectDescription" name='description' value={projectFormData.description} onChange={handleInputChange} required={true} />
                                 </div>
-                                <div class="mb-3">
-                                    <label for="ProjectDeadline" class="form-label">Deadline</label>
-                                    <input type="date" class="form-control" id="ProjectDeadline" name='deadline' value={projectFormData.deadline} onChange={handleInputChange} required={true} />
+                                <div className="mb-3">
+                                    <label for="ProjectDeadline" className="form-label">Deadline</label>
+                                    <input type="date" className="form-control" id="ProjectDeadline" name='deadline' value={projectFormData.deadline} onChange={handleInputChange} required={true} />
                                 </div>
-                                <button type="submit" class="btn btn-primary" >Create</button>
+                                <button type="submit" className="btn btn-primary" >Create</button>
                             </form>
                         </div>
                     </div>

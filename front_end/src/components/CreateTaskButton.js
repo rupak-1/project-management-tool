@@ -42,11 +42,11 @@ function CreateTaskButton(props) {
         <i className="fa-solid fa-plus" />
         <p className='text-content'>add another task</p>
       </div>}
-      {!formClosed && <div class="card main-card">
-        <div class="card-body">
+      {!formClosed && <div className="card main-card">
+        <div className="card-body">
           <TextareaAutosize placeholder='Enter project title' autoFocus required onChange={e => setTitle(e.target.value)} style={{ resize: "none", width: "100%", overflow: "hidden" }} />
           <TextareaAutosize placeholder='Enter project description' required onChange={e => setDescription(e.target.value)} style={{ resize: "none", width: "100%", overflow: "hidden" }} />
-          <a href="#" class="btn btn-primary" onClick={handleCreate}>Create Task</a>
+          <a href="#" className="btn btn-primary" onClick={handleCreate}>Create Task</a>
         </div>
       </div>}
     </>

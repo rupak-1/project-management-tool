@@ -28,6 +28,7 @@ const createProject = async (req, res) => {
 };
 
 const addTask = async (req, res) => {
+  console.log("Adddddddddddddddddddddddddddddddddd")
   const body = req.body;
   if (!body) {
     return res.status(400).json({
@@ -40,7 +41,6 @@ const addTask = async (req, res) => {
     const project = await Project.findOne({_id: body._id});
     project.tasks.push(body.task);
     project.save();
-    console.log(project);
     return res.status(200).json({
       success: true,
       message: "Project updated!",
@@ -56,15 +56,6 @@ const addTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    // const project = await Project.findOne({_id: req.body._id});
-    // console.log("-----------------------------------------p")
-    // console.log(project)
-    // const filteredTasks = project.tasks.filter((task) => task._id !== req.body.task_id)
-    // const newProject = {...project, tasks: filteredTasks};
-    // newProject.save()
-    // console.log("-----------------------------------------a")
-    // console.log(await Project.findOne({ _id: req.body._id}))
-    console.log("yes")
     const project = await Project.updateOne({_id: req.body._id}, {$pull: {tasks: {_id: req.body.task_id}}})
 
     if (!project) {
@@ -81,7 +72,7 @@ const deleteTask = async (req, res) => {
 
 const editTask = async (req, res) => {
   try {
-    console.log("In");
+    console.log("---------------------------------");
     const project = await Project.findOne({_id: req.body._id});
     project.tasks.where({_id: req.body.task_id}).status = true;
     console.log(project);
@@ -125,9 +116,9 @@ const getProjects = async (req, res) => {
 };
 
 const getProject = async (req, res) => {
+  console.log("gettttting protesldkjffffffsdfsdfsdf")
   try {
     const project = await Project.findOne({_id:req.params.id});
-    console.log(project);
     return res.status(200).json({ success: true, data: project });
   } catch (error) {
     return res.status(400).json({ success: false, error });

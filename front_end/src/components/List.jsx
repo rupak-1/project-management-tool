@@ -5,13 +5,12 @@ import "./List.css";
 import { useParams } from "react-router-dom"
 
 function List(props) {
-  console.log(props);
   const projectId = useParams().id;
 
   function handledelete(item) {
     const token = localStorage.getItem("Token")
     fetch(`http://localhost:5001/api/project/task`, {
-      method: "DELETE",
+      method: "PUT",
       body: JSON.stringify({
         "_id": projectId,
         "task_id": item

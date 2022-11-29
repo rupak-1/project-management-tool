@@ -52,20 +52,20 @@ function Signup() {
     <div className='col col-md-5 signup__bg'></div>
     <div className='col col-md-7 d-flex align-items-center justify-content-center flex-direction-colums'>
       <form className='form-style' onSubmit={handleSignup}>
-      <div class="mb-3">
-          <label for="exampleInputName" class="form-label">UserName</label>
+      <div className="mb-3">
+          <label for="exampleInputName" className="form-label">UserName</label>
           <input type="text" className="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder='John Doe' onChange={e => setName(e.target.value)} value={name} required/>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <div className="mb-3">
+          <label for="exampleInputEmail1" className="form-label">Email address</label>
           <input type="email" className="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder='@example.com' onChange={e => setEmail(e.target.value)} value={email} required/>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
+        <div className="mb-3">
+          <label for="exampleInputPassword1" className="form-label">Password</label>
           <input type="password" className="form-control" id="exampleInputPassword" onChange={e => setPassword(e.target.value)} value={password} required />
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword2" class="form-label">Re-enter Password</label>
+        <div className="mb-3">
+          <label for="exampleInputPassword2" className="form-label">Re-enter Password</label>
           <input type="password" className="form-control" id="exampleInputPassword1" onChange={e => setRePassword(e.target.value)} value={repassword} required/>
         </div>
         <button type="submit" className="btn btn-primary">Signup</button>

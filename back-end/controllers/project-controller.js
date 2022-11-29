@@ -40,6 +40,7 @@ const addTask = async (req, res) => {
     const project = await Project.findOne({_id: body._id});
     project.tasks.push(body.task);
     project.save();
+    console.log(project);
     return res.status(200).json({
       success: true,
       message: "Project updated!",
@@ -63,8 +64,27 @@ const deleteTask = async (req, res) => {
     // newProject.save()
     // console.log("-----------------------------------------a")
     // console.log(await Project.findOne({ _id: req.body._id}))
-
+    console.log("yes")
     const project = await Project.updateOne({_id: req.body._id}, {$pull: {tasks: {_id: req.body.task_id}}})
+
+    if (!project) {
+      return res
+        .status(404)
+        .json({ success: false, error: `Project not found` });
+    }
+    return res.status(200).json({ success: true, id: project._id });
+  } catch (error) {
+    return res.status(400).json({ success: false, error });
+  }
+
+}
+
+const editTask = async (req, res) => {
+  try {
+    console.log("In");
+    const project = await Project.findOne({_id: req.body._id});
+    project.tasks.where({_id: req.body.task_id}).status = true;
+    console.log(project);
 
     if (!project) {
       return res
@@ -106,8 +126,9 @@ const getProjects = async (req, res) => {
 
 const getProject = async (req, res) => {
   try {
-    const projects = await Project.findOne({_id:req.params.id});
-    return res.status(200).json({ success: true, data: projects });
+    const project = await Project.findOne({_id:req.params.id});
+    console.log(project);
+    return res.status(200).json({ success: true, data: project });
   } catch (error) {
     return res.status(400).json({ success: false, error });
   }
@@ -125,6 +146,7 @@ const getRecentProjects = async (req, res) => {
 module.exports = {
   createProject,
   addTask,
+  editTask,
   deleteTask,
   deleteProject,
   getProjects,

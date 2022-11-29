@@ -29,7 +29,6 @@ const createProject = async (req, res) => {
 
 const addTask = async (req, res) => {
   const body = req.body;
-  console.log(body);
   if (!body) {
     return res.status(400).json({
       success: false,
@@ -41,7 +40,6 @@ const addTask = async (req, res) => {
     const project = await Project.findOne({_id: body._id});
     project.tasks.push(body.task);
     project.save();
-    console.log(project);
     return res.status(200).json({
       success: true,
       message: "Project updated!",
@@ -56,7 +54,6 @@ const addTask = async (req, res) => {
 };
 
 const deleteTask = async (req, res) => {
-  console.log(req.body)
   try {
     // const project = await Project.findOne({_id: req.body._id});
     // console.log("-----------------------------------------p")
@@ -67,7 +64,7 @@ const deleteTask = async (req, res) => {
     // console.log("-----------------------------------------a")
     // console.log(await Project.findOne({ _id: req.body._id}))
 
-    const project = await Project.update({"tasks": {_id: }})
+    const project = await Project.updateOne({_id: req.body._id}, {$pull: {tasks: {_id: req.body.task_id}}})
 
     if (!project) {
       return res
@@ -83,7 +80,6 @@ const deleteTask = async (req, res) => {
 
 
 const deleteProject = async (req, res) => {
-  console.log(req.body)
   try {
     const project = await Project.findOneAndDelete({ _id: req.body._id});
 
@@ -110,9 +106,7 @@ const getProjects = async (req, res) => {
 
 const getProject = async (req, res) => {
   try {
-    console.log(req.params.id);
     const projects = await Project.findOne({_id:req.params.id});
-    console.log(projects)
     return res.status(200).json({ success: true, data: projects });
   } catch (error) {
     return res.status(400).json({ success: false, error });

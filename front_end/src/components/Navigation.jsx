@@ -50,12 +50,12 @@ function Navigation() {
               <li className='nav-item me-5'>
                 <Link to='/dashboard' className='text-secondary'><i className="fa-solid fa-table-columns"></i></Link>
               </li>
-              <li className="nav-item me-5">
+              {/* <li className="nav-item me-5">
                 <div className='search-wrapper text-secondary'>
                   <i className="fa-solid fa-magnifying-glass"></i>
                   <input type='search' placeholder='Search here' />
                 </div>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <div className="dropdown text-secondary">
                   <div className='user-wrapper d-flex align-items-center dropdown-toggle' type="button" data-bs-toggle="dropdown" aria-expanded="false">

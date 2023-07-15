@@ -28,14 +28,14 @@ function RecentProjects(props) {
                 {props.projects && props.projects.map((project) => {
                     return (
                         <div className="card text-center justify-content-start align-content-start me-5" key={project._id}>
-                            <div className="card-header bg-dark text-white">
+                            <div className="card-header bg-primary text-white">
                                 <h4> {project.title} </h4>
                             </div>
                             <div className="card-body bg-light">
                                 <p>{project.description}</p>
                                 <h6>Deadline: {getDate(project.deadline)}</h6>
-                                <h6>Tasks Completed: {getCompletedTasks(project.tasks)} / {project.tasks.length}</h6>
-                                <Link to={`/project/${project._id}`} className="btn btn-dark mt-2"><i className="fa-solid fa-right-long"></i></Link>
+                                <h6>Task Completed: {getCompletedTasks(project.tasks)}/ {project.tasks.length}</h6>
+                                <Link to={`/project/${project._id}`} className="btn btn-primary mt-2"><i className="fa-solid fa-right-long"></i></Link>
                             </div>
                         </div>
                     );

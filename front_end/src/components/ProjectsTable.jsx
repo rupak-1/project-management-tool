@@ -33,7 +33,7 @@ function ProjectsTable(props) {
             <div className="card-body bg-light">
                 <table width="100%">
                     <thead>
-                        <tr className="bg-dark">
+                        <tr className="bg-primary">
                             <td>Project Title</td>         
                             <td> Project Started </td>
                             <td>Deadline</td>

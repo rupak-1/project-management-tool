@@ -53,7 +53,7 @@ function Signup() {
     <div className='col col-md-7 d-flex align-items-center justify-content-center flex-direction-colums'>
       <form className='form-style' onSubmit={handleSignup}>
       <div className="mb-3">
-          <label for="exampleInputName" className="form-label">UserName</label>
+          <label for="exampleInputName" className="form-label">User Name</label>
           <input type="text" className="form-control" id="exampleInputName" aria-describedby="emailHelp" placeholder='John Doe' onChange={e => setName(e.target.value)} value={name} required/>
         </div>
         <div className="mb-3">

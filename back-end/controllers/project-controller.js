@@ -146,7 +146,7 @@ const getProject = async (req, res) => {
 
 const getRecentProjects = async (req, res) => {
   try {
-    const projects = await Project.find({ creator_id: req.params.id }).sort({ updatedAt: -1 }).limit(4);
+    const projects = await Project.find({ creator_id: req.params.id }).sort({ updatedAt: -1 }).limit(5);
     return res.status(200).json({ success: true, data: projects });
   } catch (error) {
     return res.status(400).json({ success: false, error });

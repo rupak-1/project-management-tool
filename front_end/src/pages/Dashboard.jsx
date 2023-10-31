@@ -1,49 +1,27 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Navigation from '../components/Navigation'
-import ProjectsTable from '../components/ProjectsTable'
-import RecentProjects from '../components/RecentProjects'
-import {decodeToken} from 'react-jwt';
+import './Dashboard.css'
+import UploadCard from '../components/UploadCard';
+const {Uploader} = require("uploader");
 
 function Dashboard() {
-  const [recentProjects, setRecentProjects] = useState();
-  const [allProjects, setAllProjects] = useState();
-  const [refresh, setRefresh] = useState(false);
-  const token = localStorage.getItem("Token");
-  const decodedToken = decodeToken(token);
-
-  const getAllProjects = async () => {
-    await fetch(`http://localhost:5001/api/projects/${decodedToken._id}`, {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json', 'authorization': token }
-    })
-      .then(res => res.json())
-      .then(json => {
-        setAllProjects(json.data);
-      });
-  }
-
-  const getRecentProjects = async () => {
-    await fetch(`http://localhost:5001/api/projects/recent/${decodedToken._id}`, {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json', 'authorization': token }
-    })
-      .then(res => res.json())
-      .then(json => {
-        setRecentProjects(json.data);
-      });
-  };
-
-
-  useEffect(()=> {
-    getAllProjects();
-    getRecentProjects();
-  }, [refresh])
-
+  const compile = () => {}
   return (
-    <div>
+    <div className='bg-dark container-height'>
       <Navigation />
-      <RecentProjects setRefresh={() => setRefresh(!refresh)} projects={recentProjects}/>
-      <ProjectsTable setRefresh={() => setRefresh(!refresh)} projects={allProjects}  />
+      <div className='container-fluid mt-5'>
+        <div className='row align-items-center'>
+          <div className='col-7 text-center'>
+            <div className='dashboard'> </div>
+            <h1 className='text-light'>Compile-it</h1>
+          </div>
+
+          <div className='col-4'>
+            <UploadCard/>
+          </div>
+        </div>
+
+      </div>
     </div>
   )
 }

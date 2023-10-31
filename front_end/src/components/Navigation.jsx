@@ -31,7 +31,7 @@ function Navigation() {
   return (
     <nav className="navbar navbar-expand-sm bg-white sticky-top">
       <div className="container-fluid ms-3">
-        <a className="navbar-brand" href="/"><i className="fa-solid fa-layer-group"></i> <span>Project Management</span></a>
+        <a className="navbar-brand" href="/"><i className="fa-solid fa-layer-group"></i> <span>Compile-it!</span></a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -62,7 +62,7 @@ function Navigation() {
                     <i className="fa-regular fa-circle-user"></i>
                     <div>
                       <h5 className='mb-0'>{decodedToken.name}</h5>
-                      <h7>Member</h7>
+                      <h6>Member</h6>
                     </div>
                   </div>
                   <div className="dropdown-menu bg-light">

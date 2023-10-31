@@ -1,5 +1,5 @@
 .signup__bg{
-    background: url(https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2839&q=80);
+    background: url('../project_assets/login.svg');
     height: 90vh;
     background-position: center;
     background-size: cover;
